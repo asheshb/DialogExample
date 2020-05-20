@@ -56,17 +56,16 @@ class MainActivity : AppCompatActivity() {
         with(builder){
             setView(dialogView)
             setTitle("Add city")
-            setPositiveButton(getString(R.string.add), object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface, id: Int) {
-                    val country = countryName.text.toString()
-                    val city = cityName.text.toString()
-                    if(country.isNotBlank() && city.isNotBlank()){
-                        cityData.add(City(country, city))
-                        cityData.sortBy { it.name }
-                        saveCities()
-                    }
+            setPositiveButton(getString(R.string.add)
+            ) { dialog, id ->
+                val country = countryName.text.toString()
+                val city = cityName.text.toString()
+                if(country.isNotBlank() && city.isNotBlank()){
+                    cityData.add(City(country, city))
+                    cityData.sortBy { it.name }
+                    saveCities()
                 }
-            })
+            }
             setNegativeButton(getString(R.string.cancel), object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                 }
@@ -96,12 +95,11 @@ class MainActivity : AppCompatActivity() {
             setTitle(getString(R.string.confirm_reset))
             setMessage(getString(R.string.confirm_reset_message))
 
-            setPositiveButton(getString(R.string.yes), object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    cityData.clear()
-                    saveCities()
-                }
-            })
+            setPositiveButton(getString(R.string.yes)
+            ) { dialog, which ->
+                cityData.clear()
+                saveCities()
+            }
             setNegativeButton(getString(R.string.no), object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                 }
